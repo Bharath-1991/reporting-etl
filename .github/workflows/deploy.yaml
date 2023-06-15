@@ -19,11 +19,63 @@ jobs:
     steps: 
       - name: Clone repository
         uses: actions/checkout@v2
-      - name: Run DOcker container
+      - name: Run Unit Tests
         uses: addnab/docker-run-action@v3
         with:
           image: amazon/aws-glue-libs:glue_libs_3.0.0_image_01
           options: -v ${{ github.workspace }}:/home/glue_user/workspace/ -e DISABLE_SSL=true --rm -p 4040:4040 -p 18080:18080
           run: |
-            echo "Running Script"
+            echo "Running Unit Test"
             python3 -m pytest
+  deploy:
+    runs-on: [self-hosted, mi-ecs-fargate-hosted-runner]
+    needs: test
+    if: ${{ success() }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Missing dependencies
+        run: |
+          apt-get install -y openssh-client
+
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Install tfenv
+        run: | 
+          if [ -d ~/.tfenv ]; then rm -Rf ~/.tfenv; fi
+          git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+          echo "$HOME/.tfenv/bin" >> $GITHUB_PATH
+
+      - name: Install terraform (using tfenv)
+        run: |
+          export PATH="$HOME/.tfenv/bin:$PATH"
+          tfenv install
+          tfenv use
+
+      - name: Configure environment variables
+        run: |
+          WORKSPACE=${GITHUB_REF#refs/heads/}
+          if [[ ! "sandbox,dev,stage,qa,prod" =~ (,|^)$WORKSPACE(,|$) ]]; then
+            WORKSPACE=dev
+          fi
+          echo "WORKSPACE=$WORKSPACE"
+          echo "WORKSPACE=$WORKSPACE" >> $GITHUB_ENV
+
+      - name: Terraform init
+        run: |
+          export PATH="$HOME/.tfenv/bin:$PATH"
+          cd terraform
+          terraform init
+
+      - name: Terraform plan
+        run: |
+          export PATH="$HOME/.tfenv/bin:$PATH"
+          pip3 install -r .github/scripts/requirements.txt
+          cd terraform
+          for f in *.jinja; do jinja2 $f -D PROJECT=$PROJECT -D WORKSPACE=$WORKSPACE >> ./$(basename $f .jinja); done
+          for f in *.tfvars; do echo "\n \n"; echo $f; cat $f; done
+          terraform workspace select $WORKSPACE
+          terraform plan -var-file=terraform.tfvars -var use_profile=false
+      
