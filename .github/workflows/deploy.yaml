@@ -28,7 +28,7 @@ jobs:
       options: --rm 
     steps:
       - name: Install dependencies
-        run: pip3 install -r .github/scripts/requirements.txt
+        run: pip3 install pytest
       - name: Run Pytest
         run: python3 -m pytest
   deploy:
