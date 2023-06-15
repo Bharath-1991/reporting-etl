@@ -24,7 +24,7 @@ jobs:
         - 4040:4040
         - 18080:18080
       volumes:
-        - $HOME:/home/glue_user/workspace/
+        - ${{ github.workspace }}:/home/glue_user/workspace/
       options: --rm 
     steps:
       - name: Run Pytest
