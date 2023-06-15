@@ -27,6 +27,8 @@ jobs:
         - ${{ github.workspace }}:/home/glue_user/workspace/
       options: --rm 
     steps:
+      - name: Install dependencies
+        run: pip3 install -r .github/scripts/requirements.txt
       - name: Run Pytest
         run: python3 -m pytest
   deploy:
