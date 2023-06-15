@@ -28,7 +28,7 @@ jobs:
             echo "Running Unit Test"
             python3 -m pytest
   deploy:
-    runs-on: [self-hosted, mi-ecs-fargate-hosted-runner]
+    runs-on: ubuntu-latest
     needs: test
     if: ${{ success() }}
     defaults:
