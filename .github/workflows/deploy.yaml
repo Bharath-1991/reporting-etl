@@ -1,0 +1,91 @@
+name: deploy
+on:
+  push:
+    branches:
+      - sandbox
+      - dev
+      - infra_2214
+      - main
+      # - stage
+      # - qa
+      # - prod
+      # - infra_2204
+env:
+  PROJECT: tier3
+jobs:
+  test:
+    name: Run Glue Unit tests
+    runs-on: ubuntu-latest
+    container:
+      image: amazon/aws-glue-libs:glue_libs_3.0.0_image_01
+      env:
+        DISABLE_SSL: true
+      ports:
+        - 4040:4040
+        - 18080:18080
+      volumes:
+        - $HOME:/home/glue_user/workspace/
+      options: --rm 
+    steps:
+      - name: Run Pytest
+        run: python3 -m pytest
+  deploy:
+    runs-on: [self-hosted, mi-ecs-fargate-hosted-runner]
+    needs: test
+    if: ${{ success() }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Missing dependencies
+        run: |
+          apt-get install -y openssh-client
+
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Install tfenv
+        run: | 
+          if [ -d ~/.tfenv ]; then rm -Rf ~/.tfenv; fi
+          git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+          echo "$HOME/.tfenv/bin" >> $GITHUB_PATH
+
+      - name: Install terraform (using tfenv)
+        run: |
+          export PATH="$HOME/.tfenv/bin:$PATH"
+          tfenv install
+          tfenv use
+
+      - name: Configure environment variables
+        run: |
+          WORKSPACE=${GITHUB_REF#refs/heads/}
+          if [[ ! "sandbox,dev,stage,qa,prod" =~ (,|^)$WORKSPACE(,|$) ]]; then
+            WORKSPACE=dev1
+          fi
+          echo "WORKSPACE=$WORKSPACE"
+          echo "WORKSPACE=$WORKSPACE" >> $GITHUB_ENV
+
+      - name: Terraform init
+        run: |
+          export PATH="$HOME/.tfenv/bin:$PATH"
+          cd terraform
+          terraform init
+
+      - name: Terraform apply
+        run: |
+          export PATH="$HOME/.tfenv/bin:$PATH"
+          pip3 install -r .github/scripts/requirements.txt
+          cd terraform
+          for f in *.jinja; do jinja2 $f -D PROJECT=$PROJECT -D WORKSPACE=$WORKSPACE >> ./$(basename $f .jinja); done
+          for f in *.tfvars; do echo "\n \n"; echo $f; cat $f; done
+          terraform workspace select $WORKSPACE
+          terraform apply -var-file=terraform.tfvars -var use_profile=false -auto-approve
+
+      - name: Sync Glue Jobs Scripts to S3
+        run: |
+          python3 .github/scripts/S3Sync.py -e $WORKSPACE -s src/ -d $PROJECT-$WORKSPACE-glue/scripts/ -r True
+
+      - name: Import QuickSight Package
+        run: |
+          python3 .github/scripts/QuickSight.py -e $WORKSPACE -r ca-central-1 -p $PROJECT
+      

@@ -1,0 +1,1 @@
+{"resourceType":"datasource","dataSourceId":"athena-datasource","name":"Athena","type":"ATHENA","dataSourceParameters":{"athenaParameters":{"workGroup":"primary"}},"sslProperties":{"disableSsl":false}}

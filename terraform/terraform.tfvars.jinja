@@ -1,0 +1,665 @@
+create_security_configuration = false
+
+glue_job_config = [
+    {
+        name = "Vehicle"
+        description= "vehicle"
+        iam_role_name = ""
+        script_location = "vehicle.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "User"
+        description= "user"
+        iam_role_name = ""
+        script_location = "user.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Trade In"
+        description= "TradeIn"
+        iam_role_name = ""
+        script_location = "trade_in.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Protection Plan"
+        description= "ProtectionPlan"
+        iam_role_name = ""
+        script_location = "protection_plan.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Order"
+        description= "Order"
+        iam_role_name = ""
+        script_location = "order.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Deposit"
+        description= "Deposit"
+        iam_role_name = ""
+        script_location = "deposit.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Dealership"
+        description= "Dealership"
+        iam_role_name = ""
+        script_location = "dealership.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Credit Application"
+        description= "CreditApplication"
+        iam_role_name = ""
+        script_location = "credit_application.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Appointment"
+        description= "Appointment"
+        iam_role_name = ""
+        script_location = "appointment.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+            
+        }
+    },
+    {
+        name = "Accessory"
+        description= "Accessory"
+        iam_role_name = ""
+        script_location = "accessory.py"
+        command_name = "glueetl"
+        glue_version = "3.0"
+        connections = ["{{ PROJECT }}-{{ WORKSPACE }}-glue-db"]
+        python_version = 3
+        max_concurrent_runs = 1
+        security_configuration = ""
+        max_retries = 0
+        execution_class = "STANDARD"
+        worker_type = "G.8X"
+        job_language = "python"
+        extra_py_files = []
+        additional_python_modules = []
+        enable_spark_ui = true
+        enable_job_insights = true
+        enable_continuous_cloudwatch_log = true
+        enable_auto_scaling = true
+        spark_event_logs_path = "sparkHistoryLogs"
+        temp_dir= "temporary"
+        user_jars_first = false
+        use_postgres_driver = false
+        extra_files = []
+        continuous_log_stream_prefix = ""
+        enable_s3_parquet_optimized_committer = false
+        enable_rename_algorithm_v2 = false
+        notify_delay_after = 0
+        timeout = 2880
+        workers = 5
+        job_bookmark_option = "job-bookmark-disable"
+        enable_glue_datacatalog = true
+        enable_metrics = true
+        enable_continuous_log_filter = false
+        additional_job_parameters = {
+            "--db_connection_name" = "{{ PROJECT }}-{{ WORKSPACE }}-glue-db",
+            "--s3_bucket_path"     = "{{ PROJECT }}-{{ WORKSPACE }}-glue"
+        }
+    } 
+]
+
+workflow = [
+    {
+        workflow_name = "OnDemand{{ PROJECT }}{{ WORKSPACE }}SemanticReload"
+        triggers = [
+            {
+                trigger_name = "OnDemand{{ PROJECT }}{{ WORKSPACE }}SemanticReload"
+                type = "ON_DEMAND"
+                schedule_expression = null
+                actions = [
+                    {
+                        job_name = "Accessory"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Appointment"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Credit Application"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Dealership"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Deposit"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Order"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Protection Plan"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Trade In"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "User"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Vehicle"
+                        crawler_name = null
+                    }
+                ]
+                predicate = {}
+            },
+            {
+                trigger_name = "OnDemand{{ PROJECT }}{{ WORKSPACE }}ETLDone"
+                type = "CONDITIONAL"
+                schedule_expression = null
+                actions = [
+                    {
+                        crawler_name = "{{ PROJECT }}-{{ WORKSPACE }}-glue-s3"
+                        job_name = null
+                    }
+                ],
+                predicate = {
+                    logical = "AND"
+                    conditions = [
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Accessory"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Appointment"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Credit Application"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Dealership"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Deposit"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Order"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Protection Plan"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Trade In"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "User"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Vehicle"
+                            state            = "SUCCEEDED"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+
+    {
+        workflow_name = "Morning{{ PROJECT }}{{ WORKSPACE }}SemanticReload"
+        triggers = [
+            {
+                trigger_name = "Morning{{ PROJECT }}{{ WORKSPACE }}SemanticReload"
+                type = "SCHEDULED"
+                schedule_expression = "cron(0 10 * * ? *)"
+                actions = [
+                    {
+                        job_name = "Accessory"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Appointment"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Credit Application"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Dealership"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Deposit"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Order"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Protection Plan"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Trade In"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "User"
+                        crawler_name = null
+                    },
+                    {
+                        job_name = "Vehicle"
+                        crawler_name = null
+                    }
+                ]
+                predicate = {}
+            },
+            {
+                trigger_name = "Morning{{ PROJECT }}{{ WORKSPACE }}ETLDone"
+                type = "CONDITIONAL"
+                schedule_expression = null
+                actions = [
+                    {
+                        crawler_name = "{{ PROJECT }}-{{ WORKSPACE }}-glue-s3"
+                        job_name = null
+                    }
+                ],
+                predicate = {
+                    logical = "AND"
+                    conditions = [
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Accessory"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Appointment"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Credit Application"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Dealership"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Deposit"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Order"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Protection Plan"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Trade In"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "User"
+                            state            = "SUCCEEDED"
+                        },
+                        {
+                            logical_operator = "EQUALS"
+                            job_name         = "Vehicle"
+                            state            = "SUCCEEDED"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]
