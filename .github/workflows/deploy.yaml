@@ -28,7 +28,7 @@ jobs:
       options: --rm 
     steps:
       - name: Install dependencies
-        run: pip3 install pytest
+        run: sudo pip3 install pytest
       - name: Run Pytest
         run: python3 -m pytest
   deploy:
